@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 调试模式 -->
+   <!--  <constant name="struts.enable.DynamicMethodInvocation" value="false" /> -->
+    <constant name="struts.devMode" value="false" />
+	<!-- 这里的struts-default不能删除，否则将不能实例化本实例 -->
+	<!-- <package name=""></package> -->
+    <package name="action" namespace="/" extends="struts-default">
+        <default-action-ref name="index" />
+		<!-- 配置全局属性 映像-->
+        <global-results>
+            <result name="error">/WEB-INF/error.jsp</result>
+            <result name="nothing">/WEB-INF/user/nothing.jsp</result>
+        </global-results>
+        
+             
+		<!-- 配置全局错误view -->
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+        
+        
+        <!-- 配置Action -->
+        <action name="user_*" class="com.zhou.action.RegisterAction" method="{1}">
+        	<result name="input">/WEB-INF/user/user_regist.jsp</result>
+        	<result name="success">/WEB-INF/user/user_center.jsp</result>
+        	 <result name="login">/WEB-INF/user/user_login.jsp</result>
+        </action>
+       <action name="house_*" class="com.zhou.action.HouseAction" method="{1}">
+        	<result name="input">/WEB-INF/user/house_create.jsp</result>
+        	<result name="success">/WEB-INF/user/user_center.jsp</result>
+        	<result name="orders">/WEB-INF/user/user_orders.jsp</result>
+        	<result name="list">/WEB-INF/user/house_list.jsp</result>
+        	<result name="house_detail">/WEB-INF/user/house_detail.jsp</result>
+        </action>
+        <!-- 可能用到的标记 -->
+        <!-- <%@taglib prefix="s" uri="/struts-tags"%> -->
+        
+        
+        <action name="manager_*" class="com.zhou.action.ManagerAction" method="{1}">
+        	<result name="input">/WEB-INF/manager/manager_login.jsp</result>
+        	<result name="success">/WEB-INF/manager/manager_main.jsp</result>
+        </action>
+        
+		<action name="manage_*" class="com.zhou.action.ManagerAction" method="{1}">
+        	<result name="users">/WEB-INF/manager/manage_users.jsp</result>
+        	<result name="list">/WEB-INF/manager/manage_publishment.jsp</result>
+        	<result name="message">/WEB-INF/manager/manage_message.jsp</result>
+        </action>
+        <action name="search" class="com.zhou.action.UserAction" method="search">
+        	<result name="list">/WEB-INF/user/InfoList.jsp</result>
+        	<result name="input">/WEB-INF/index.jsp</result>
+        </action>
+        <action name="index">
+        	<result>/WEB-INF/index.jsp</result>
+        </action>
+    </package>
+
+
+    <!-- Add packages here -->
+
+</struts>
